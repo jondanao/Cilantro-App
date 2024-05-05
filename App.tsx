@@ -1,20 +1,68 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import Images from "@/assets/Images";
+import RecipesStack from "@/app/features/recipes";
+import FavoritesScreen from "@/app/features/favorites/FavoritesScreen";
+import GroceryScreen from "@/app/features/grocery/GroceryScreen";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <NavigationContainer>
+            <Tab.Navigator screenOptions={{ headerShown: false }}>
+                <Tab.Screen
+                    name="RecipesStack"
+                    component={RecipesStack}
+                    options={{
+                        title: "Recipes",
+                        tabBarIcon: () => (
+                            <Image
+                                source={Images.tabs.recipes}
+                                style={styles.tabIcon}
+                            />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="FavoritesScreen"
+                    component={FavoritesScreen}
+                    options={{
+                        title: "Favorites",
+                        tabBarBadge: 8,
+                        tabBarIcon: () => (
+                            <Image
+                                source={Images.tabs.favorites}
+                                style={styles.tabIcon}
+                            />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="GroceryScreen"
+                    component={GroceryScreen}
+                    options={{
+                        title: "Grocery",
+                        tabBarBadge: 12,
+                        tabBarIcon: () => (
+                            <Image
+                                source={Images.tabs.grocery}
+                                style={styles.tabIcon}
+                            />
+                        ),
+                    }}
+                />
+            </Tab.Navigator>
+        </NavigationContainer>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    tabIcon: {
+        width: 24,
+        height: 24,
+        resizeMode: "contain",
+    },
 });
