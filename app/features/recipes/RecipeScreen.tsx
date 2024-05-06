@@ -14,10 +14,12 @@ const RecipeScreen = ({ route, navigation }) => {
         <View style={styles.container}>
             <ScrollView>
                 <Image source={{ uri: recipe.image }} style={styles.image} />
+
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{recipe.label}</Text>
                     <Text style={styles.source}>{recipe.source}</Text>
                 </View>
+
                 <View style={styles.nutrientContainer}>
                     <NutrientLabel
                         icon="calories"
@@ -28,9 +30,22 @@ const RecipeScreen = ({ route, navigation }) => {
                         value={recipe.proteinValue}
                     />
                 </View>
+
                 <View style={styles.nutrientContainer}>
                     <NutrientLabel icon="fats" value={recipe.fatValue} />
                     <NutrientLabel icon="carbs" value={recipe.carbValue} />
+                </View>
+
+                <View style={styles.ingredientsContainer}>
+                    <Text style={styles.ingredientTitle}>Ingredients</Text>
+
+                    {recipe.ingredientLines.map((ingredient, index) => (
+                        <>
+                            <Text style={styles.ingredientText}>
+                                {ingredient}
+                            </Text>
+                        </>
+                    ))}
                 </View>
             </ScrollView>
         </View>
@@ -54,6 +69,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
 
+    ingredientsContainer: {
+        backgroundColor: "rgba(0, 0, 0, 0.1)",
+        padding: 20,
+    },
+
     nutrientLabel: {
         flex: 1,
     },
@@ -71,6 +91,18 @@ const styles = StyleSheet.create({
     source: {
         fontSize: 18,
         color: "gray",
+    },
+
+    ingredientTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 20,
+    },
+
+    ingredientText: {
+        fontSize: 16,
+        marginTop: 5,
+        marginBottom: 5,
     },
 });
 
