@@ -6,7 +6,9 @@ import {
     TouchableWithoutFeedback,
     View,
 } from "react-native";
+
 import SearchBar from "./components/SearchBar";
+import RecipeCard from "./components/RecipeCard";
 
 const RecipesScreen = ({ navigation }) => {
     const [searchText, setSearchText] = useState("");
@@ -27,6 +29,9 @@ const RecipesScreen = ({ navigation }) => {
                     onChangeText={onSearchChangeText}
                     onSubmitEditing={onSearchSubmit}
                 />
+                <View style={{ padding: 20 }}>
+                    <RecipeCard />
+                </View>
             </View>
         </TouchableWithoutFeedback>
     );
