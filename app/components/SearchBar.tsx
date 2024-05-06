@@ -1,3 +1,4 @@
+import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 
@@ -35,8 +36,10 @@ const SearchBar = (props: SearchBarProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        height: 80,
-        padding: 12,
+        height: 60,
+        paddingTop: 12,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
 
     innerContainer: {
