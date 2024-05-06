@@ -1,11 +1,34 @@
-import { StyleSheet, View } from "react-native";
+import { useState } from "react";
+import {
+    FlatList,
+    Keyboard,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    View,
+} from "react-native";
 import SearchBar from "./components/SearchBar";
 
 const RecipesScreen = ({ navigation }) => {
+    const [searchText, setSearchText] = useState("");
+
+    const onSearchChangeText = (text: string) => {
+        setSearchText(text);
+    };
+
+    const onSearchSubmit = () => {
+        console.log("Search submitted:", searchText);
+    };
+
     return (
-        <View style={styles.container}>
-            <SearchBar />
-        </View>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+                <SearchBar
+                    text={searchText}
+                    onChangeText={onSearchChangeText}
+                    onSubmitEditing={onSearchSubmit}
+                />
+            </View>
+        </TouchableWithoutFeedback>
     );
 };
 

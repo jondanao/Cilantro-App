@@ -1,7 +1,14 @@
 import { View, StyleSheet, TextInput } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 
-const SearchBar = () => {
+interface SearchBarProps {
+    placeholder?: string;
+    text?: string;
+    onChangeText?: (text: string) => void;
+    onSubmitEditing?: () => void;
+}
+
+const SearchBar = (props: SearchBarProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -9,7 +16,14 @@ const SearchBar = () => {
                     <Icon name="search" size={24} color="gray" />
                 </View>
                 <View style={styles.inputContainer}>
-                    <TextInput placeholder="Search" style={styles.textInput} />
+                    <TextInput
+                        placeholder={props.placeholder ?? "Search"}
+                        value={props.text}
+                        style={styles.textInput}
+                        returnKeyType="search"
+                        onChangeText={props.onChangeText}
+                        onSubmitEditing={props.onSubmitEditing}
+                    />
                 </View>
                 <View style={styles.iconContainer}>
                     <Icon name="sliders" size={24} color="gray" />
