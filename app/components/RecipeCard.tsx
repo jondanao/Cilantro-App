@@ -12,11 +12,13 @@ interface RecipeCardProps {
 
 const RecipeCard = (props: RecipeCardProps) => {
     return (
-        <TouchableOpacity onPress={props.onPress}>
+        <TouchableOpacity activeOpacity={0.7} onPress={props.onPress}>
             <View style={styles.container}>
                 <Image source={{ uri: props.imageUrl }} style={styles.image} />
                 <View style={styles.detailsContainer}>
-                    <Text style={styles.title}>{props.title}</Text>
+                    <Text style={styles.title} numberOfLines={1}>
+                        {props.title}
+                    </Text>
                     <View style={styles.byLineContainer}>
                         <Text style={styles.source}>{props.source}</Text>
                         <View style={styles.calorieContainer}>
@@ -25,7 +27,7 @@ const RecipeCard = (props: RecipeCardProps) => {
                                 style={styles.calorieIcon}
                             />
                             <Text style={styles.calories}>
-                                {props.calories} kcal
+                                {Math.round(props.calories)} kcal
                             </Text>
                         </View>
                     </View>
@@ -40,6 +42,10 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.05)",
         height: 270,
         borderRadius: 20,
+        marginTop: 12,
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 12,
     },
 
     detailsContainer: {

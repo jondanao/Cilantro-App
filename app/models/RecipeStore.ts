@@ -1,9 +1,9 @@
-import { types, flow } from "mobx-state-tree";
+import { types, flow, applySnapshot } from "mobx-state-tree";
 
 export const Ingredient = types.model("Ingredient", {
     text: types.string,
     quantity: types.number,
-    measure: types.string,
+    measure: types.maybeNull(types.string),
     food: types.string,
     weight: types.number,
     foodCategory: types.string,
@@ -13,7 +13,7 @@ export const Ingredient = types.model("Ingredient", {
 export const Digest = types.model("Digest", {
     label: types.string,
     tag: types.string,
-    schemaOrgTag: types.string,
+    schemaOrgTag: types.maybeNull(types.string),
     total: types.number,
     hasRDI: types.boolean,
     daily: types.number,
@@ -21,6 +21,7 @@ export const Digest = types.model("Digest", {
 });
 
 export const Recipe = types.model("Recipe", {
+    uri: types.string,
     label: types.string,
     image: types.string,
     source: types.string,
@@ -34,6 +35,7 @@ export const Recipe = types.model("Recipe", {
 
 export const RecipeStore = types
     .model("RecipeStore", {
+        recipes: types.optional(types.array(Recipe), []),
         error: types.maybeNull(types.string),
     })
     .actions((self) => ({
@@ -46,12 +48,16 @@ export const RecipeStore = types
 
                 if (response.status === 200) {
                     const data = yield response.json();
-                    return data;
+                    const recipes = data.hits.map((hit) => hit.recipe);
+                    applySnapshot(self.recipes, recipes);
                 } else {
                     self.error = "Failed to fetch recipes";
                 }
             } catch (error) {
                 self.error = "Something went wrong";
+                console.log(error);
             }
         }),
     }));
+
+export const recipeStore = RecipeStore.create();

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+    Alert,
     FlatList,
     Keyboard,
     StyleSheet,
@@ -7,9 +8,10 @@ import {
     View,
 } from "react-native";
 
-import SearchBar from "../../components/SearchBar";
-import RecipeCard from "../../components/RecipeCard";
+import SearchBar from "@/app/components/SearchBar";
+import RecipeCard from "@/app/components/RecipeCard";
 import ProgressBar from "@/app/components/ProgressBar";
+import { recipeStore } from "@/app/models/RecipeStore";
 
 const RecipesScreen = ({ navigation }) => {
     const [searchText, setSearchText] = useState("");
@@ -29,11 +31,16 @@ const RecipesScreen = ({ navigation }) => {
     };
 
     // Private methods
-    const fetchData = async () => {
+    const fetchData = () => {
         setProgressVisible(true);
-        setTimeout(() => {
+
+        recipeStore.searchRecipes(searchText).then(() => {
             setProgressVisible(false);
-        }, 2000);
+
+            if (recipeStore.error) {
+                Alert.alert("Error", recipeStore.error);
+            }
+        });
     };
 
     // Render methods
@@ -44,6 +51,19 @@ const RecipesScreen = ({ navigation }) => {
                     text={searchText}
                     onChangeText={onSearchChangeText}
                     onSubmitEditing={onSearchSubmit}
+                />
+                <FlatList
+                    data={recipeStore.recipes}
+                    renderItem={({ item }) => (
+                        <RecipeCard
+                            title={item.label}
+                            source={item.source}
+                            imageUrl={item.image}
+                            calories={item.digest[0].total}
+                            onPress={() => onRecipePress()}
+                        />
+                    )}
+                    keyExtractor={(item) => item.uri}
                 />
                 <ProgressBar visible={progressVisible} />
             </View>
