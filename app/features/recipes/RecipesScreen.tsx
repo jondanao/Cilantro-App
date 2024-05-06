@@ -26,8 +26,10 @@ const RecipesScreen = ({ navigation }) => {
         fetchData();
     };
 
-    const onRecipePress = () => {
-        console.log("Recipe pressed");
+    const onRecipePress = (recipe) => {
+        navigation.push("RecipeScreen", {
+            recipe: recipe,
+        });
     };
 
     // Private methods
@@ -60,7 +62,7 @@ const RecipesScreen = ({ navigation }) => {
                             source={item.source}
                             imageUrl={item.image}
                             calories={item.digest[0].total}
-                            onPress={() => onRecipePress()}
+                            onPress={() => onRecipePress(item)}
                         />
                     )}
                     keyExtractor={(item) => item.uri}
