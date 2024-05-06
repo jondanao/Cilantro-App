@@ -20,18 +20,60 @@ export const Digest = types.model("Digest", {
     unit: types.string,
 });
 
-export const Recipe = types.model("Recipe", {
-    uri: types.string,
-    label: types.string,
-    image: types.string,
-    source: types.string,
-    shareAs: types.string,
-    yield: types.number,
-    healthLabels: types.array(types.string),
-    ingredientLines: types.array(types.string),
-    ingredients: types.array(Ingredient),
-    digest: types.array(Digest),
-});
+export const Recipe = types
+    .model("Recipe", {
+        uri: types.string,
+        label: types.string,
+        image: types.string,
+        source: types.string,
+        shareAs: types.string,
+        yield: types.number,
+        calories: types.number,
+        healthLabels: types.array(types.string),
+        ingredientLines: types.array(types.string),
+        ingredients: types.array(Ingredient),
+        digest: types.array(Digest),
+    })
+    .views((self) => ({
+        get calorieValue() {
+            const nutrient = self.calories;
+            return `${nutrient.toFixed(0)} kcal`;
+        },
+
+        get fatValue() {
+            const nutrient = self.digest.find((digest) => digest.tag === "FAT");
+
+            if (!nutrient) {
+                return "0g fats";
+            }
+
+            return `${nutrient.total.toFixed(0)}${nutrient.unit} fats`;
+        },
+
+        get proteinValue() {
+            const nutrient = self.digest.find(
+                (digest) => digest.tag === "PROCNT"
+            );
+
+            if (!nutrient) {
+                return "0g proteins";
+            }
+
+            return `${nutrient.total.toFixed(0)}${nutrient.unit} proteins`;
+        },
+
+        get carbValue() {
+            const nutrient = self.digest.find(
+                (digest) => digest.tag === "CHOCDF"
+            );
+
+            if (!nutrient) {
+                return "0g carbs";
+            }
+
+            return `${nutrient.total.toFixed(0)}${nutrient.unit} carbs`;
+        },
+    }));
 
 export const RecipeStore = types
     .model("RecipeStore", {

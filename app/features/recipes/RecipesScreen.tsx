@@ -61,7 +61,7 @@ const RecipesScreen = ({ navigation }) => {
                             title={item.label}
                             source={item.source}
                             imageUrl={item.image}
-                            calories={item.digest[0].total}
+                            calories={item.calories}
                             onPress={() => onRecipePress(item)}
                         />
                     )}
