@@ -39,7 +39,7 @@ const RecipeCard = (props: RecipeCardProps) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "rgba(0, 0, 0, 0.05)",
+        backgroundColor: "rgba(0, 0, 0, 0.1)",
         height: 270,
         borderRadius: 20,
         marginTop: 12,

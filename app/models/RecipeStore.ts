@@ -6,8 +6,8 @@ export const Ingredient = types.model("Ingredient", {
     measure: types.maybeNull(types.string),
     food: types.string,
     weight: types.number,
-    foodCategory: types.string,
-    image: types.string,
+    foodCategory: types.maybeNull(types.string),
+    image: types.maybeNull(types.string),
 });
 
 export const Digest = types.model("Digest", {
