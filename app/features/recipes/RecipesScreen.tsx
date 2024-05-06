@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
     FlatList,
     Keyboard,
@@ -7,20 +7,36 @@ import {
     View,
 } from "react-native";
 
-import SearchBar from "./components/SearchBar";
-import RecipeCard from "./components/RecipeCard";
+import SearchBar from "../../components/SearchBar";
+import RecipeCard from "../../components/RecipeCard";
+import ProgressBar from "@/app/components/ProgressBar";
 
 const RecipesScreen = ({ navigation }) => {
     const [searchText, setSearchText] = useState("");
+    const [progressVisible, setProgressVisible] = useState(false);
 
+    // Event handlers
     const onSearchChangeText = (text: string) => {
         setSearchText(text);
     };
 
     const onSearchSubmit = () => {
-        console.log("Search submitted:", searchText);
+        fetchData();
     };
 
+    const onRecipePress = () => {
+        console.log("Recipe pressed");
+    };
+
+    // Private methods
+    const fetchData = async () => {
+        setProgressVisible(true);
+        setTimeout(() => {
+            setProgressVisible(false);
+        }, 2000);
+    };
+
+    // Render methods
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
@@ -29,9 +45,7 @@ const RecipesScreen = ({ navigation }) => {
                     onChangeText={onSearchChangeText}
                     onSubmitEditing={onSearchSubmit}
                 />
-                <View style={{ padding: 20 }}>
-                    <RecipeCard />
-                </View>
+                <ProgressBar visible={progressVisible} />
             </View>
         </TouchableWithoutFeedback>
     );
