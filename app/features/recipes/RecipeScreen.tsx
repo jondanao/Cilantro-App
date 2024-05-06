@@ -1,6 +1,7 @@
 import { Image, View, ScrollView, StyleSheet, Text } from "react-native";
 import React, { useEffect } from "react";
 
+import FavoriteButton from "@/app/components/FavoriteButton";
 import NutrientLabel from "@/app/components/NutrientLabel";
 
 const RecipeScreen = ({ route, navigation }) => {
@@ -13,7 +14,13 @@ const RecipeScreen = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
             <ScrollView>
-                <Image source={{ uri: recipe.image }} style={styles.image} />
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={{ uri: recipe.image }}
+                        style={styles.image}
+                    />
+                    <FavoriteButton style={styles.favoriteButton} />
+                </View>
 
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{recipe.label}</Text>
@@ -58,6 +65,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
 
+    imageContainer: {
+        marginBottom: 20,
+    },
+
     titleContainer: {
         padding: 20,
     },
@@ -72,6 +83,12 @@ const styles = StyleSheet.create({
     ingredientsContainer: {
         backgroundColor: "rgba(0, 0, 0, 0.1)",
         padding: 20,
+    },
+
+    favoriteButton: {
+        position: "absolute",
+        top: 20,
+        right: 20,
     },
 
     nutrientLabel: {
