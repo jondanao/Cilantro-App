@@ -1,13 +1,13 @@
 import { View, Text, TouchableOpacity } from "react-native";
 
-const SearchScreen = ({ navigation }) => {
+const RecipesScreen = ({ navigation }) => {
     return (
         <View>
             <TouchableOpacity onPress={() => navigation.push("RecipeScreen")}>
-                <Text>Search Screen</Text>
+                <Text>Recipes Screen</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-export default SearchScreen;
+export default RecipesScreen;
