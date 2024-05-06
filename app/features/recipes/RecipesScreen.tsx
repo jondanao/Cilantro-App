@@ -1,13 +1,19 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
+import SearchBar from "./components/SearchBar";
 
 const RecipesScreen = ({ navigation }) => {
     return (
-        <View>
-            <TouchableOpacity onPress={() => navigation.push("RecipeScreen")}>
-                <Text>Recipes Screen</Text>
-            </TouchableOpacity>
+        <View style={styles.container}>
+            <SearchBar />
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#fff",
+    },
+});
 
 export default RecipesScreen;
