@@ -17,14 +17,16 @@ const NumberSpinner = (props: NumberSpinnerProps) => {
     const onSubtractPress = () => {
         const newValue = value - 1;
 
-        if (newValue > -1) {
+        if (newValue > 0) {
             setValue(newValue);
+            props.onChange && props.onChange(newValue);
         }
     };
 
     const onAddPress = () => {
         const newValue = value + 1;
         setValue(newValue);
+        props.onChange && props.onChange(newValue);
     };
 
     // Private methods

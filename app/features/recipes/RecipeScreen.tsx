@@ -6,14 +6,16 @@ import {
     Text,
     TouchableOpacity,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import FavoriteButton from "@/app/components/FavoriteButton";
 import NutrientLabel from "@/app/components/NutrientLabel";
 import NumberSpinner from "@/app/components/NumberSpinner";
+import { IIngredient } from "@/app/models/RecipeStore";
 
 const RecipeScreen = ({ route, navigation }) => {
     const { recipe } = route.params;
+    const [yieldValue, setYieldValue] = useState(recipe.yield);
 
     useEffect(() => {
         navigation.setOptions({ title: recipe.label });
@@ -24,7 +26,24 @@ const RecipeScreen = ({ route, navigation }) => {
         console.log("onFavoritePress");
     };
 
+    const onYieldChange = (value: number) => {
+        setYieldValue(value);
+    };
+
     // Private methods
+    const computeIngredient = (ingredient: IIngredient) => {
+        let ingredientLine = "";
+        const quantity = ingredient.quantity * (yieldValue / recipe.yield);
+        const food = ingredient.food;
+        const measure =
+            ingredient.measure !== "<unit>" ? ingredient.measure : "";
+
+        ingredientLine = quantity ? `${Math.round(quantity * 10) / 10} ` : "";
+        ingredientLine += measure ? `${measure} ` : "";
+        ingredientLine += `${food}`;
+
+        return ingredientLine;
+    };
 
     // Render methods
     return (
@@ -65,16 +84,23 @@ const RecipeScreen = ({ route, navigation }) => {
                 <View style={styles.ingredientsContainer}>
                     <View style={styles.ingredientHeaderContainer}>
                         <Text style={styles.ingredientTitle}>Ingredients</Text>
-                        <NumberSpinner value={recipe.yield} />
+                        <NumberSpinner
+                            value={yieldValue}
+                            onChange={onYieldChange}
+                        />
                     </View>
 
-                    {recipe.ingredientLines.map((ingredient, index) => (
-                        <TouchableOpacity key={index}>
-                            <Text style={styles.ingredientText}>
-                                {ingredient}
-                            </Text>
-                        </TouchableOpacity>
-                    ))}
+                    {recipe.ingredients.map((ingredient, index) => {
+                        const ingredientLine = computeIngredient(ingredient);
+
+                        return (
+                            <TouchableOpacity key={index}>
+                                <Text style={styles.ingredientText}>
+                                    {ingredientLine}
+                                </Text>
+                            </TouchableOpacity>
+                        );
+                    })}
                 </View>
             </ScrollView>
         </View>

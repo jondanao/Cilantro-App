@@ -1,4 +1,4 @@
-import { types, flow, applySnapshot } from "mobx-state-tree";
+import { types, flow, applySnapshot, Instance } from "mobx-state-tree";
 
 export const Ingredient = types.model("Ingredient", {
     text: types.string,
@@ -9,6 +9,8 @@ export const Ingredient = types.model("Ingredient", {
     foodCategory: types.maybeNull(types.string),
     image: types.maybeNull(types.string),
 });
+
+export type IIngredient = Instance<typeof Ingredient>;
 
 export const Digest = types.model("Digest", {
     label: types.string,
@@ -74,6 +76,8 @@ export const Recipe = types
             return `${nutrient.total.toFixed(0)}${nutrient.unit} carbs`;
         },
     }));
+
+export type IRecipe = Instance<typeof Recipe>;
 
 export const RecipeStore = types
     .model("RecipeStore", {

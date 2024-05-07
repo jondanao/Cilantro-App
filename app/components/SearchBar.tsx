@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
 
     textInput: {
         fontSize: 16,
+        flex: 1,
     },
 });
 
