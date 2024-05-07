@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Images from "@/app/assets/Images";
 import RecipesStack from "@/app/features/recipes";
-import FavoritesScreen from "@/app/features/favorites/FavoritesScreen";
+import FavoritesStack from "@/app/features/favorites";
 import GroceryScreen from "@/app/features/grocery/GroceryScreen";
 
 const Tab = createBottomTabNavigator();
@@ -28,8 +28,8 @@ export default function App() {
                     }}
                 />
                 <Tab.Screen
-                    name="FavoritesScreen"
-                    component={FavoritesScreen}
+                    name="FavoritesStack"
+                    component={FavoritesStack}
                     options={{
                         title: "Favorites",
                         tabBarBadge: 8,
