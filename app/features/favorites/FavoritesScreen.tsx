@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import React from "react";
 import { observer } from "mobx-react";
 
@@ -16,7 +16,7 @@ const FavoritesScreen = ({ navigation }) => {
 
     // Render methods
     return (
-        <View>
+        <View style={styles.container}>
             <FlatList
                 data={appStore.favorites}
                 renderItem={({ item }) => (
@@ -33,5 +33,11 @@ const FavoritesScreen = ({ navigation }) => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
 
 export default observer(FavoritesScreen);
