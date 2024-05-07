@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 
 import FavoriteButton from "@/app/components/FavoriteButton";
 import NutrientLabel from "@/app/components/NutrientLabel";
+import NumberSpinner from "@/app/components/NumberSpinner";
 
 const RecipeScreen = ({ route, navigation }) => {
     const { recipe } = route.params;
@@ -62,7 +63,10 @@ const RecipeScreen = ({ route, navigation }) => {
                 </View>
 
                 <View style={styles.ingredientsContainer}>
-                    <Text style={styles.ingredientTitle}>Ingredients</Text>
+                    <View style={styles.ingredientHeaderContainer}>
+                        <Text style={styles.ingredientTitle}>Ingredients</Text>
+                        <NumberSpinner value={recipe.yield} />
+                    </View>
 
                     {recipe.ingredientLines.map((ingredient, index) => (
                         <TouchableOpacity key={index}>
@@ -95,6 +99,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginLeft: 20,
         marginRight: 20,
+        marginBottom: 20,
+    },
+
+    ingredientHeaderContainer: {
+        flexDirection: "row",
+        alignItems: "center",
         marginBottom: 20,
     },
 
@@ -131,7 +141,7 @@ const styles = StyleSheet.create({
     ingredientTitle: {
         fontSize: 20,
         fontWeight: "bold",
-        marginBottom: 20,
+        flex: 1,
     },
 
     ingredientText: {
