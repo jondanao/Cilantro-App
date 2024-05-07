@@ -6,9 +6,16 @@ export const AppStore = types
         favorites: types.optional(types.array(Recipe), []),
     })
     .actions((self) => ({
-        addFavorite: (recipe: IRecipe) => {
-            self.favorites.push(clone(recipe));
-            console.log(self.favorites.length);
+        toggleFavorite: (recipe: IRecipe) => {
+            const found = self.favorites.find((r) => r.uri === recipe.uri);
+
+            if (found) {
+                self.favorites.remove(found);
+            } else {
+                self.favorites.push(clone(recipe));
+            }
+
+            console.log("Favorites: ", self.favorites);
         },
     }));
 

@@ -24,7 +24,7 @@ const RecipeScreen = ({ route, navigation }) => {
 
     // Event handlers
     const onFavoritePress = (recipe: IRecipe) => {
-        appStore.addFavorite(recipe);
+        appStore.toggleFavorite(recipe);
     };
 
     const onYieldChange = (value: number) => {
