@@ -1,4 +1,11 @@
-import { Image, View, ScrollView, StyleSheet, Text } from "react-native";
+import {
+    Image,
+    View,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+} from "react-native";
 import React, { useEffect } from "react";
 
 import FavoriteButton from "@/app/components/FavoriteButton";
@@ -11,6 +18,14 @@ const RecipeScreen = ({ route, navigation }) => {
         navigation.setOptions({ title: recipe.label });
     }, []);
 
+    // Event handlers
+    const onFavoritePress = () => {
+        console.log("onFavoritePress");
+    };
+
+    // Private methods
+
+    // Render methods
     return (
         <View style={styles.container}>
             <ScrollView>
@@ -19,7 +34,10 @@ const RecipeScreen = ({ route, navigation }) => {
                         source={{ uri: recipe.image }}
                         style={styles.image}
                     />
-                    <FavoriteButton style={styles.favoriteButton} />
+                    <FavoriteButton
+                        style={styles.favoriteButton}
+                        onPress={onFavoritePress}
+                    />
                 </View>
 
                 <View style={styles.titleContainer}>
@@ -47,11 +65,11 @@ const RecipeScreen = ({ route, navigation }) => {
                     <Text style={styles.ingredientTitle}>Ingredients</Text>
 
                     {recipe.ingredientLines.map((ingredient, index) => (
-                        <>
+                        <TouchableOpacity key={index}>
                             <Text style={styles.ingredientText}>
                                 {ingredient}
                             </Text>
-                        </>
+                        </TouchableOpacity>
                     ))}
                 </View>
             </ScrollView>
