@@ -11,7 +11,8 @@ import React, { useEffect, useState } from "react";
 import FavoriteButton from "@/app/components/FavoriteButton";
 import NutrientLabel from "@/app/components/NutrientLabel";
 import NumberSpinner from "@/app/components/NumberSpinner";
-import { IIngredient } from "@/app/models/RecipeStore";
+import { IIngredient, IRecipe } from "@/app/models/RecipeStore";
+import { appStore } from "@/app/models/AppStore";
 
 const RecipeScreen = ({ route, navigation }) => {
     const { recipe } = route.params;
@@ -22,8 +23,8 @@ const RecipeScreen = ({ route, navigation }) => {
     }, []);
 
     // Event handlers
-    const onFavoritePress = () => {
-        console.log("onFavoritePress");
+    const onFavoritePress = (recipe: IRecipe) => {
+        appStore.addFavorite(recipe);
     };
 
     const onYieldChange = (value: number) => {
@@ -56,7 +57,7 @@ const RecipeScreen = ({ route, navigation }) => {
                     />
                     <FavoriteButton
                         style={styles.favoriteButton}
-                        onPress={onFavoritePress}
+                        onPress={() => onFavoritePress(recipe)}
                     />
                 </View>
 
