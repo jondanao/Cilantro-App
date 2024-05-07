@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     },
 
     yieldLabel: {
-        fontSize: 10,
+        fontSize: 12,
     },
 
     button: {
