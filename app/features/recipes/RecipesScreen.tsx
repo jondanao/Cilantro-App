@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
     Alert,
     FlatList,
+    Image,
     Keyboard,
     StyleSheet,
     TouchableWithoutFeedback,
@@ -12,6 +13,7 @@ import SearchBar from "@/app/components/SearchBar";
 import RecipeCard from "@/app/components/RecipeCard";
 import ProgressBar from "@/app/components/ProgressBar";
 import { recipeStore } from "@/app/models/RecipeStore";
+import Images from "@/app/assets/Images";
 
 const RecipesScreen = ({ navigation }) => {
     const [searchText, setSearchText] = useState("");
@@ -49,6 +51,9 @@ const RecipesScreen = ({ navigation }) => {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.container}>
+                {!recipeStore.recipes.length && (
+                    <Image source={Images.cover} style={styles.coverImage} />
+                )}
                 <SearchBar
                     text={searchText}
                     onChangeText={onSearchChangeText}
@@ -67,6 +72,7 @@ const RecipesScreen = ({ navigation }) => {
                     )}
                     keyExtractor={(item) => item.uri}
                 />
+
                 <ProgressBar visible={progressVisible} />
             </View>
         </TouchableWithoutFeedback>
@@ -77,6 +83,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+    },
+
+    coverImage: {
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        resizeMode: "cover",
     },
 });
 

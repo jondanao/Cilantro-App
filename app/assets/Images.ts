@@ -15,6 +15,8 @@ const Images = {
         checkOutline: require("./images/icons/check_outline.png"),
         checkFilled: require("./images/icons/check_filled.png"),
     },
+
+    cover: require("./images/cover.png"),
 };
 
 export default Images;
