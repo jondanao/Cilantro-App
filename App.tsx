@@ -13,6 +13,9 @@ import { appStore } from "@/app/models/AppStore";
 const Tab = createBottomTabNavigator();
 
 const AppTabs = observer(() => {
+    const favoritesCount = appStore.favorites.length || undefined;
+    const groceryListCount = appStore.groceryList.length || undefined;
+
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
             <Tab.Screen
@@ -33,7 +36,7 @@ const AppTabs = observer(() => {
                 component={FavoritesStack}
                 options={{
                     title: "Favorites",
-                    tabBarBadge: appStore.favorites.length,
+                    tabBarBadge: favoritesCount,
                     tabBarIcon: () => (
                         <Image
                             source={Images.tabs.favorites}
@@ -47,7 +50,7 @@ const AppTabs = observer(() => {
                 component={GroceryStack}
                 options={{
                     title: "Grocery List",
-                    tabBarBadge: appStore.groceryList.length,
+                    tabBarBadge: groceryListCount,
                     tabBarIcon: () => (
                         <Image
                             source={Images.tabs.grocery}
