@@ -4,7 +4,17 @@
 
 The Cilantro Recipe App is a mobile application developed using React Native. It enables users to search for recipes, view recipe details, adjust serving sizes, manage their favorite recipes in a personal menu, create a grocery list from recipe ingredients, and tick off each item as it's acquired.
 
+### Demo
+
+
+
+https://github.com/jondanao/Cilantro-App/assets/110116/e42ec6f2-ac8e-4e73-b38a-14567298cb15
+
+
+
 ### User Stories:
+
+![mockups](https://github.com/jondanao/Cilantro-App/assets/110116/1f62a386-813a-4993-8cc1-7217649ab776)
 
 #### Search Recipe Screen:
 
