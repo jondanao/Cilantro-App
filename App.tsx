@@ -47,7 +47,7 @@ const AppTabs = observer(() => {
                 component={GroceryStack}
                 options={{
                     title: "Grocery List",
-                    tabBarBadge: 0,
+                    tabBarBadge: appStore.groceryList.length,
                     tabBarIcon: () => (
                         <Image
                             source={Images.tabs.grocery}

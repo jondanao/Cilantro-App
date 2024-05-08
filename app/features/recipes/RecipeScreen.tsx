@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
+    Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
@@ -32,6 +33,13 @@ const RecipeScreen = ({ route, navigation }) => {
         setYieldValue(value);
     };
 
+    const onGroceryItemPress = (ingredientLine: string) => {
+        Alert.alert("Grocery List", `Add ${ingredientLine} to your list?`, [
+            { text: "Cancel", style: "cancel" },
+            { text: "Add", onPress: () => addGroceryItem(ingredientLine) },
+        ]);
+    };
+
     // Private methods
     const computeIngredient = (ingredient: IIngredient) => {
         let ingredientLine = "";
@@ -49,6 +57,11 @@ const RecipeScreen = ({ route, navigation }) => {
 
     const isFavorited = () => {
         return appStore.favoriteUris.includes(recipe.uri);
+    };
+
+    const addGroceryItem = (ingredientLine: string) => {
+        const id = Math.floor(Date.now() / 1000);
+        appStore.toggleGroceryItem({ id, text: ingredientLine });
     };
 
     // Render methods
@@ -101,7 +114,12 @@ const RecipeScreen = ({ route, navigation }) => {
                         const ingredientLine = computeIngredient(ingredient);
 
                         return (
-                            <TouchableOpacity key={index}>
+                            <TouchableOpacity
+                                key={index}
+                                onPress={() =>
+                                    onGroceryItemPress(ingredientLine)
+                                }
+                            >
                                 <Text style={styles.ingredientText}>
                                     {ingredientLine}
                                 </Text>
