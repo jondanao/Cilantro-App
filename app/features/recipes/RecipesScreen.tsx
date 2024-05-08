@@ -60,7 +60,9 @@ const RecipesScreen = ({ navigation }) => {
                     onSubmitEditing={onSearchSubmit}
                 />
                 <FlatList
+                    style={styles.flatlist}
                     data={recipeStore.recipes.slice()}
+                    keyExtractor={(item) => item.uri}
                     renderItem={({ item }) => (
                         <RecipeCard
                             title={item.label}
@@ -70,7 +72,6 @@ const RecipesScreen = ({ navigation }) => {
                             onPress={() => onRecipePress(item)}
                         />
                     )}
-                    keyExtractor={(item) => item.uri}
                 />
 
                 <ProgressBar visible={progressVisible} />
@@ -90,6 +91,10 @@ const styles = StyleSheet.create({
         height: "100%",
         position: "absolute",
         resizeMode: "cover",
+    },
+
+    flatlist: {
+        marginTop: 12,
     },
 });
 
