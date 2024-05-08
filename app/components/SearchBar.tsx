@@ -18,7 +18,9 @@ const SearchBar = (props: SearchBarProps) => {
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput
-                        placeholder={props.placeholder ?? "Search"}
+                        placeholder={
+                            props.placeholder ?? "Search food or ingredient"
+                        }
                         value={props.text}
                         style={styles.textInput}
                         returnKeyType="search"

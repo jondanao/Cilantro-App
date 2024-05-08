@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 import Images from "@/app/assets/Images";
 
@@ -9,13 +9,31 @@ interface GroceryItemProps {
 }
 
 const GroceryItem = (props: GroceryItemProps) => {
+    const [checked, setChecked] = useState(false);
+
+    const onPress = () => {
+        setChecked(!checked);
+        setTimeout(() => {
+            if (props.onCheckPress) {
+                props.onCheckPress();
+            }
+        }, 200);
+    };
+
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={styles.checkButton}
-                onPress={props.onCheckPress}
-            >
-                <Image source={Images.icons.checkOutline} style={styles.icon} />
+            <TouchableOpacity style={styles.checkButton} onPress={onPress}>
+                {checked ? (
+                    <Image
+                        source={Images.icons.checkFilled}
+                        style={styles.icon}
+                    />
+                ) : (
+                    <Image
+                        source={Images.icons.checkOutline}
+                        style={styles.icon}
+                    />
+                )}
             </TouchableOpacity>
             <Text style={styles.text}>{props.text}</Text>
         </View>
@@ -43,6 +61,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
+        tintColor: "green",
     },
 
     text: {
