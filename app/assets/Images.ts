@@ -12,6 +12,8 @@ const Images = {
         proteins: require("./images/icons/proteins.png"),
         heartOutline: require("./images/icons/heart_outline.png"),
         heartFilled: require("./images/icons/heart_filled.png"),
+        checkOutline: require("./images/icons/check_outline.png"),
+        checkFilled: require("./images/icons/check_filled.png"),
     },
 };
 
