@@ -87,7 +87,10 @@ export const RecipeStore = types
     .actions((self) => ({
         searchRecipes: flow(function* (searchText: string) {
             self.error = null;
-            const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchText}&app_id=67f43a52&app_key=257a9e063564019af4d5257ab5033236`;
+
+            const appId = process.env.EXPO_PUBLIC_EDAMAM_APP_ID;
+            const appKey = process.env.EXPO_PUBLIC_EDAMAM_APP_KEY;
+            const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchText}&app_id=${appId}&app_key=${appKey}`;
 
             try {
                 const response = yield fetch(url);
