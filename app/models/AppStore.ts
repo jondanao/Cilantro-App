@@ -1,4 +1,5 @@
-import { types, clone } from "mobx-state-tree";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { types, clone, flow } from "mobx-state-tree";
 import { Recipe, IRecipe } from "./RecipeStore";
 
 export const AppStore = types
@@ -6,7 +7,15 @@ export const AppStore = types
         favorites: types.optional(types.array(Recipe), []),
     })
     .actions((self) => ({
-        toggleFavorite: (recipe: IRecipe) => {
+        loadFavorites: flow(function* () {
+            const favorites = yield AsyncStorage.getItem("favorites");
+
+            if (favorites) {
+                self.favorites = JSON.parse(favorites);
+            }
+        }),
+
+        toggleFavorite: flow(function* (recipe: IRecipe) {
             const found = self.favorites.find((r) => r.uri === recipe.uri);
 
             if (found) {
@@ -15,8 +24,17 @@ export const AppStore = types
                 self.favorites.push(clone(recipe));
             }
 
-            console.log("Favorites: ", self.favorites);
+            yield AsyncStorage.setItem(
+                "favorites",
+                JSON.stringify(self.favorites)
+            );
+        }),
+    }))
+    .views((self) => ({
+        get favoriteUris() {
+            return self.favorites.map((r) => r.uri);
         },
     }));
 
 export const appStore = AppStore.create();
+appStore.loadFavorites();

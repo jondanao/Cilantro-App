@@ -10,7 +10,8 @@ const Images = {
         carbs: require("./images/icons/carbs.png"),
         fats: require("./images/icons/fats.png"),
         proteins: require("./images/icons/proteins.png"),
-        heart: require("./images/icons/heart.png"),
+        heartOutline: require("./images/icons/heart_outline.png"),
+        heartFilled: require("./images/icons/heart_filled.png"),
     },
 };
 

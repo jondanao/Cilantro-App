@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react";
 
 import FavoriteButton from "@/app/components/FavoriteButton";
 import NutrientLabel from "@/app/components/NutrientLabel";
@@ -46,6 +47,10 @@ const RecipeScreen = ({ route, navigation }) => {
         return ingredientLine;
     };
 
+    const isFavorited = () => {
+        return appStore.favoriteUris.includes(recipe.uri);
+    };
+
     // Render methods
     return (
         <View style={styles.container}>
@@ -56,6 +61,7 @@ const RecipeScreen = ({ route, navigation }) => {
                         style={styles.image}
                     />
                     <FavoriteButton
+                        isOn={isFavorited()}
                         style={styles.favoriteButton}
                         onPress={() => onFavoritePress(recipe)}
                     />
@@ -178,4 +184,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default RecipeScreen;
+export default observer(RecipeScreen);

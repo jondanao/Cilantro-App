@@ -5,17 +5,22 @@ import Images from "@/app/assets/Images";
 
 interface FavoriteButtonProps {
     style?: object;
+    isOn?: boolean;
     onPress?: () => void;
 }
 
 const FavoriteButton = (props: FavoriteButtonProps) => {
+    const icon = props.isOn
+        ? Images.icons.heartFilled
+        : Images.icons.heartOutline;
+
     return (
         <TouchableOpacity
             activeOpacity={0.7}
             style={[styles.container, props.style]}
             onPress={props.onPress}
         >
-            <Image source={Images.icons.heart} style={styles.icon} />
+            <Image source={icon} style={styles.icon} />
         </TouchableOpacity>
     );
 };
