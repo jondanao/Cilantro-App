@@ -1,14 +1,30 @@
-import { FlatList, View, StyleSheet } from "react-native";
+import {
+    FlatList,
+    LayoutAnimation,
+    Platform,
+    UIManager,
+    View,
+    StyleSheet,
+} from "react-native";
 import React from "react";
 import { observer } from "mobx-react";
 
 import { appStore, IGroceryItem } from "@/app/models/AppStore";
 import GroceryItem from "@/app/components/GroceryItem";
 
+if (
+    Platform.OS === "android" &&
+    UIManager.setLayoutAnimationEnabledExperimental
+) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+}
+
 const GroceryScreen = () => {
     const onGroceryItemPress = (item: IGroceryItem) => {
         appStore.toggleGroceryItem(item);
     };
+
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
 
     return (
         <View style={styles.container}>
