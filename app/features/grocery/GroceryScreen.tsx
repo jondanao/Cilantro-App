@@ -13,7 +13,7 @@ const GroceryScreen = () => {
     return (
         <View style={styles.container}>
             <FlatList
-                data={appStore.groceryList}
+                data={appStore.groceryList.slice()}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <GroceryItem

@@ -55,7 +55,7 @@ const RecipesScreen = ({ navigation }) => {
                     onSubmitEditing={onSearchSubmit}
                 />
                 <FlatList
-                    data={recipeStore.recipes}
+                    data={recipeStore.recipes.slice()}
                     renderItem={({ item }) => (
                         <RecipeCard
                             title={item.label}

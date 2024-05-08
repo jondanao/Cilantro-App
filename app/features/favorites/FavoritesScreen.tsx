@@ -19,7 +19,7 @@ const FavoritesScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <FlatList
-                data={appStore.favorites}
+                data={appStore.favorites.slice()}
                 renderItem={({ item }) => (
                     <RecipeCard
                         title={item.label}

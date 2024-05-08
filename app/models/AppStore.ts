@@ -69,3 +69,4 @@ export const AppStore = types
 
 export const appStore = AppStore.create();
 appStore.loadFavorites();
+appStore.loadGroceryList();
