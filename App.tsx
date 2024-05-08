@@ -7,7 +7,7 @@ import { observer } from "mobx-react";
 import Images from "@/app/assets/Images";
 import RecipesStack from "@/app/features/recipes";
 import FavoritesStack from "@/app/features/favorites";
-import GroceryScreen from "@/app/features/grocery/GroceryScreen";
+import GroceryStack from "@/app/features/grocery";
 import { appStore } from "@/app/models/AppStore";
 
 const Tab = createBottomTabNavigator();
@@ -43,11 +43,11 @@ const AppTabs = observer(() => {
                 }}
             />
             <Tab.Screen
-                name="GroceryScreen"
-                component={GroceryScreen}
+                name="GroceryStack"
+                component={GroceryStack}
                 options={{
-                    title: "Grocery",
-                    tabBarBadge: 12,
+                    title: "Grocery List",
+                    tabBarBadge: 0,
                     tabBarIcon: () => (
                         <Image
                             source={Images.tabs.grocery}
