@@ -8,11 +8,12 @@ import Images from "@/app/assets/Images";
 import RecipesStack from "@/app/features/recipes";
 import FavoritesStack from "@/app/features/favorites";
 import GroceryStack from "@/app/features/grocery";
-import { appStore } from "@/app/models/AppStore";
+import { useAppStore } from "@/app/models/AppStore";
 
 const Tab = createBottomTabNavigator();
 
 const AppTabs = observer(() => {
+    const appStore = useAppStore();
     const favoritesCount = appStore.favorites.length || undefined;
     const groceryListCount = appStore.groceryList.length || undefined;
 

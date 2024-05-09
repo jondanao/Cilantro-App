@@ -3,11 +3,13 @@ import React from "react";
 import { clone } from "mobx-state-tree";
 import { observer } from "mobx-react";
 
-import { appStore } from "@/app/models/AppStore";
+import { useAppStore } from "@/app/models/AppStore";
 import { IRecipe } from "@/app/models/RecipeStore";
 import RecipeCard from "@/app/components/RecipeCard";
 
 const FavoritesScreen = ({ navigation }) => {
+    const appStore = useAppStore();
+
     // Event handlers
     const onRecipePress = (recipe: IRecipe) => {
         navigation.push("RecipeScreen", {

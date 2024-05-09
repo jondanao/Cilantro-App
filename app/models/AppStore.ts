@@ -67,6 +67,14 @@ export const AppStore = types
         },
     }));
 
-export const appStore = AppStore.create();
-appStore.loadFavorites();
-appStore.loadGroceryList();
+let appStore;
+
+export const useAppStore = () => {
+    if (!appStore) {
+        appStore = AppStore.create();
+        appStore.loadFavorites();
+        appStore.loadGroceryList();
+    }
+
+    return appStore;
+};

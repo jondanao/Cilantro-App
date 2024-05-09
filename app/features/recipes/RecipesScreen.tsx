@@ -12,12 +12,13 @@ import {
 import SearchBar from "@/app/components/SearchBar";
 import RecipeCard from "@/app/components/RecipeCard";
 import ProgressBar from "@/app/components/ProgressBar";
-import { recipeStore } from "@/app/models/RecipeStore";
+import { useRecipeStore } from "@/app/models/RecipeStore";
 import Images from "@/app/assets/Images";
 
 const RecipesScreen = ({ navigation }) => {
     const [searchText, setSearchText] = useState("");
     const [progressVisible, setProgressVisible] = useState(false);
+    const recipeStore = useRecipeStore();
 
     // Event handlers
     const onSearchChangeText = (text: string) => {

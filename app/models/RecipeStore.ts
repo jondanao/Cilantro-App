@@ -109,4 +109,12 @@ export const RecipeStore = types
         }),
     }));
 
-export const recipeStore = RecipeStore.create();
+let recipeStore;
+
+export const useRecipeStore = () => {
+    if (!recipeStore) {
+        recipeStore = RecipeStore.create();
+    }
+
+    return recipeStore;
+};

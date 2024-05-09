@@ -14,10 +14,11 @@ import FavoriteButton from "@/app/components/FavoriteButton";
 import NutrientLabel from "@/app/components/NutrientLabel";
 import NumberSpinner from "@/app/components/NumberSpinner";
 import { IIngredient, IRecipe } from "@/app/models/RecipeStore";
-import { appStore } from "@/app/models/AppStore";
+import { useAppStore } from "@/app/models/AppStore";
 
 const RecipeScreen = ({ route, navigation }) => {
     const { recipe } = route.params;
+    const appStore = useAppStore();
     const [yieldValue, setYieldValue] = useState(recipe.yield);
 
     useEffect(() => {

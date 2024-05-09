@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { observer } from "mobx-react";
 
-import { appStore, IGroceryItem } from "@/app/models/AppStore";
+import { useAppStore, IGroceryItem } from "@/app/models/AppStore";
 import GroceryItem from "@/app/components/GroceryItem";
 
 if (
@@ -20,6 +20,9 @@ if (
 }
 
 const GroceryScreen = () => {
+    const appStore = useAppStore();
+
+    // Event handlers
     const onGroceryItemPress = (item: IGroceryItem) => {
         appStore.toggleGroceryItem(item);
     };
