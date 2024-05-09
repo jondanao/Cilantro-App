@@ -109,7 +109,9 @@ export const RecipeStore = types
         }),
     }));
 
-let recipeStore;
+export type IRecipeStore = Instance<typeof RecipeStore>;
+
+let recipeStore: IRecipeStore;
 
 export const useRecipeStore = () => {
     if (!recipeStore) {

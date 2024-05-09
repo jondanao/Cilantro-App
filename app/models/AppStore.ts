@@ -67,7 +67,9 @@ export const AppStore = types
         },
     }));
 
-let appStore;
+export type IAppStore = Instance<typeof AppStore>;
+
+let appStore: IAppStore;
 
 export const useAppStore = () => {
     if (!appStore) {
