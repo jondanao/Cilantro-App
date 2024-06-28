@@ -79,3 +79,11 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
     },
 });
+
+// Load Reactotron
+import reactotron from "./app/devtools/ReactotronConfig";
+import { useRecipeStore } from "./app/models/RecipeStore";
+
+if (__DEV__) {
+    reactotron.trackMstNode(useRecipeStore());
+}

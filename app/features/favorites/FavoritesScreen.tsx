@@ -1,6 +1,5 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import React from "react";
-import { clone } from "mobx-state-tree";
 import { observer } from "mobx-react";
 
 import { useAppStore } from "@/app/models/AppStore";
@@ -13,7 +12,7 @@ const FavoritesScreen = ({ navigation }) => {
     // Event handlers
     const onRecipePress = (recipe: IRecipe) => {
         navigation.push("RecipeScreen", {
-            recipe: clone(recipe),
+            recipe: recipe,
         });
     };
 

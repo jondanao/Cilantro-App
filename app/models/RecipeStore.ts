@@ -36,6 +36,11 @@ export const Recipe = types
         ingredients: types.array(Ingredient),
         digest: types.array(Digest),
     })
+    .actions((self) => ({
+        setYield: (value: number) => {
+            self.yield = value;
+        },
+    }))
     .views((self) => ({
         get calorieValue() {
             const nutrient = self.calories;
